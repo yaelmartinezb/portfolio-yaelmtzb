@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi sitio web</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons/css/boxicons.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- cargar header -->
+    <div id="header-container"></div>
+
+    <!-- cargar secciones -->
+    <div id="main-container"></div>
+
+    <!-- cargar el footer -->
+    <div id="footer-container"></div>
+
+    <script>
+      async function loadSections() {
+        try {
+          const [header, home, about, services, portfolio, contact, footer] =
+            await Promise.all([
+              fetch("sections/header.html").then((response) => response.text()),
+              fetch("sections/home.html").then((response) => response.text()),
+              fetch("sections/about.html").then((response) => response.text()),
+              fetch("sections/services.html").then((response) =>
+                response.text()
+              ),
+              fetch("sections/portfolio.html").then((response) =>
+                response.text()
+              ),
+              fetch("sections/contact.html").then((response) =>
+                response.text()
+              ),
+              fetch("sections/footer.html").then((response) => response.text()),
+            ]);
+
+          document.getElementById("header-container").innerHTML = header;
+          document.getElementById("main-container").innerHTML =
+            home + about + services + portfolio + contact;
+          document.getElementById("footer-container").innerHTML = footer;
+        } catch (error) {
+          console.error("Error al cargar las secciones:", error);
+        }
+      }
+
+      loadSections();
+    </script>
+  </body>
+</html>
+
+<script>
+  AOS.init({
+    duration: 1000,
+    easing: "ease-in-out",
+    once: true,
+  });
+</script>
+
+<script>
+  async function loadSections() {
+    try {
+      const [header, home, about, services, portfolio, contact, footer] =
+        await Promise.all([
+          fetch("sections/header.html").then((response) => response.text()),
+          fetch("sections/home.html").then((response) => response.text()),
+          fetch("sections/about.html").then((response) => response.text()),
+          fetch("sections/services.html").then((response) => response.text()),
+          fetch("sections/portfolio.html").then((response) => response.text()),
+          fetch("sections/contact.html").then((response) => response.text()),
+          fetch("sections/footer.html").then((response) => response.text()),
+        ]);
+
+      document.getElementById("header-container").innerHTML = header;
+      document.getElementById("main-container").innerHTML =
+        home + about + services + portfolio + contact;
+      document.getElementById("footer-container").innerHTML = footer;
+
+      AOS.init({
+        duration: 1000,
+        easing: "ease-in-out",
+        once: true,
+      });
+
+      initializeMenuToggle();
+    } catch (error) {
+      console.error("Error al cargar las secciones:", error);
+    }
+  }
+
+  function initializeMenuToggle() {
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+      });
+    }
+  }
+
+  loadSections();
+</script>
