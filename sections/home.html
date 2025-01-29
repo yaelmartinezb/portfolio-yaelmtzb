@@ -1,6 +1,9 @@
 <section
   class="home bg-gray-50 min-h-screen flex items-center justify-center px-6 lg:px-20 bg-cover bg-center relative pt-16 sm:pt-24 md:pt-32"
-  style="background-image: url('images/home-img.webp')"
+  style="
+    background-image: url('images/home-img.webp');
+    animation: backgroundMove 30s linear infinite;
+  "
   id="home"
   data-aos="fade-up"
 >
@@ -68,3 +71,14 @@
     </div>
   </div>
 </section>
+
+<style>
+  @keyframes backgroundMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 100%;
+    }
+  }
+</style>
